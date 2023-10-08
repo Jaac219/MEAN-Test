@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const locationService = require('../services/locationService')
+const { getMunicipalities } = require('../controllers/locationController.js')
 
-router.get('', ()=>{})
+router.get('/municipality', getMunicipalities)
 
 module.exports = router
