@@ -4,7 +4,6 @@ const fs = require('fs')
 const getMinerImage = (req, res) =>{
   try {
     const { imgName } = req.params
-    console.log(imgName);
 
     const imageRoute = join(__dirname, '..', `uploads/img/${imgName}`)
     fs.readFile(imageRoute, (err, data) => {

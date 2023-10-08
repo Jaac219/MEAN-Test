@@ -79,7 +79,6 @@ const update = async (req, res) => {
     const img = req.file
     if (img) {
       const newFileName = `${id}${extname(img.originalname)}`
-      console.log(newFileName);
       imgUrl = `${req.headers.host}/api/v1/upload/img/${newFileName}`
       saveImage(img, newFileName)
     }
