@@ -3,15 +3,16 @@ const { Schema, model } = require('mongoose')
 const collectionName = 'miner'
 
 const schema = new Schema({
-  firstName: { type: String, require: true },
-  lastName: { type: String, require: true },
+  _id: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   typeId: { 
     type: String, 
     enum: ['CC','CI', 'CE', 'TI', 'RC', 'PASSPORT'], 
-    require: true
+    required: true
   },
-  identification: { type: Number, require: true },
-  municipality: { type: String, require: true },
+  identification: { type: Number, required: true },
+  municipality: { type: String, required: true },
   imgUrl: { type: String, default: '' }
 }, {
   _id: false,
