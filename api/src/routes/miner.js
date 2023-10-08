@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
-const minerController = require('../controllers/minerController.js')
+const { getAll, getOne } = require('../controllers/minerController.js')
 
-router.get('', ()=>{})
+router.get('/', getAll)
+router.get('/:id', getOne)
 
 module.exports = router
