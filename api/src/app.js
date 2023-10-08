@@ -15,5 +15,13 @@ app.use((err, req, res, next) => {
   res.status(status).send(message);
 })
 
-module.exports = app
+const initApp = (port) => {
+  app.listen(port, ()=>{
+    console.log(`🚀 [Api] Listening in port: ${port}`);
+  })
+}
+
+module.exports = {
+  initApp
+}
 
