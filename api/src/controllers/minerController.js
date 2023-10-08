@@ -1,6 +1,8 @@
 const MinerModel = require('../models/Miner.js')
 const { v4: uuidv4 } = require('uuid')
 
+const typesId = ['CC','CI', 'CE', 'TI', 'RC', 'PASSPORT']
+
 const getAll = async (req, res) => {
   try {
     const miners = await MinerModel.find().lean()
@@ -88,10 +90,13 @@ const deleteOne = async (req, res) => {
   }
 }
 
+const getTypesId = (req, res) => res.send(typesId)
+
 module.exports = {
   getAll,
   getOne,
   create,
   update,
-  deleteOne
+  deleteOne,
+  getTypesId
 }
