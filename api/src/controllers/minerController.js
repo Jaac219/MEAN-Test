@@ -1,5 +1,7 @@
 const MinerModel = require('../models/Miner.js')
 const { v4: uuidv4 } = require('uuid')
+const fs = require('fs')
+const { join, extname } = require('path')
 
 const typesId = ['CC','CI', 'CE', 'TI', 'RC', 'PASSPORT']
 
@@ -31,6 +33,8 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
   try {
+    let imgUrl = ''
+
     const insert = {
       firstName,
       lastName,
@@ -40,6 +44,15 @@ const create = async (req, res) => {
     } = req.body
 
     insert._id = uuidv4()
+    const img = req.file
+    
+    if (img) {
+      const newFileName = `${insert._id}${extname(img.originalname)}`
+      imgUrl = `${req.headers.host}/api/v1/upload/img/${newFileName}`
+      saveImage(img, newFileName)
+    }
+
+    if (imgUrl) insert.imgUrl = imgUrl
 
     const miner = await new MinerModel(insert).save()
     res.status(200).send(miner?._id || {})
@@ -54,6 +67,7 @@ const update = async (req, res) => {
     const { id } = req.params
     if(!id) throw new Error('Id miner is required') 
 
+    let imgUrl = ''
     const {
       firstName,
       lastName,
@@ -62,6 +76,14 @@ const update = async (req, res) => {
       municipality
     } = req.body
 
+    const img = req.file
+    if (img) {
+      const newFileName = `${id}${extname(img.originalname)}`
+      console.log(newFileName);
+      imgUrl = `${req.headers.host}/api/v1/upload/img/${newFileName}`
+      saveImage(img, newFileName)
+    }
+
     const update = { $set: {} }
 
     if(firstName && firstName.trim()) update.$set.firstName = firstName
@@ -69,6 +91,7 @@ const update = async (req, res) => {
     if(typeId && typeId.trim()) update.$set.typeId = typeId
     if(identification) update.$set.identification = identification
     if(municipality && municipality.trim()) update.$set.municipality = municipality
+    if(imgUrl) update.$set.imgUrl = imgUrl
 
     const miner = await MinerModel.findByIdAndUpdate(id, update)
     res.status(200).send(miner?._id || {})
@@ -91,6 +114,20 @@ const deleteOne = async (req, res) => {
 }
 
 const getTypesId = (req, res) => res.send(typesId)
+
+const saveImage = (img, fileName) => {
+  try {
+    fs.writeFile(join(__dirname, '..', `uploads/img/${fileName}`), img.buffer, (err) => {
+      if (err) {
+        console.error('Error al guardar la imagen:', err);
+      } else {
+        console.log('Imagen guardada con éxito');
+      }
+    })
+  } catch (e) {
+    return e
+  }
+}
 
 module.exports = {
   getAll,
