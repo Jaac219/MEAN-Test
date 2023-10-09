@@ -1,4 +1,5 @@
 export interface Miner {
+  _id: string,
   firstName: string,
   lastName: string,
   fullName: string,

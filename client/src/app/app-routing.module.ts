@@ -5,7 +5,9 @@ import { MinerComponent } from './components/miner/miner.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'miners', component: MinerComponent}
+  {path: 'miners', component: MinerComponent},
+  {path: 'create-miner', component: MinerComponent},
+  {path: 'edit-miner/:id', component: MinerComponent}
 ];
 
 @NgModule({

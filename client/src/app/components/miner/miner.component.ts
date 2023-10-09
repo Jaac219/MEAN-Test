@@ -1,23 +1,32 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { enviroment } from 'src/app/environments/environment';
+import { Router } from '@angular/router';
 import { Miner } from 'src/app/models/miner.model';
-
+import { ApiService } from 'src/app/services/api/api.service';
 @Component({
   selector: 'app-miner',
   templateUrl: './miner.component.html',
-  styleUrls: ['./miner.component.css']
+  styleUrls: ['./miner.component.css'],
 })
-
 export class MinerComponent {
-  http = inject(HttpClient);
+  constructor(private api: ApiService, private router: Router) {}
   miners: Miner[] = [];
 
   ngOnInit() {
-    this.http.get<Miner[]>(enviroment.API_URL)
-      .subscribe((data)=>{
-        this.miners = data
-      }) 
+    this.api.getAllMiners().subscribe((data) => {
+      this.miners = data;
+    });
+  }
+
+  createMiner(){
+    this.router.navigate(['create-miner'])
+  }
+
+  editMiner(id:string) {
+    this.router.navigate(['edit-miner', id])
+  }
+
+  deleteMiner(id:string){
+    this.router.navigate(['miners'])
   }
   // @Input() miner!: Miner;
 }
