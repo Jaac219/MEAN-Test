@@ -42,4 +42,9 @@ export class ApiService {
     const endPoint = `${this.url}/miner/${id}`
     return this.http.delete(endPoint)
   }
+
+  createMiner(form: Miner):Observable<any>{
+    const endPoint = `${this.url}/miner`
+    return this.http.post(endPoint, form, { responseType: 'text' })
+  }
 }

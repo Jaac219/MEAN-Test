@@ -1,1 +1,35 @@
-<p>create-miner works!</p>
+<div class="container">
+  <h3 class="text-center">Edit miner</h3>
+  <form [formGroup]="createForm" (ngSubmit)="createMiner(createForm.value)">
+    <div class="form-group row">
+      <div class="col">
+        <label for="">First Name</label>
+        <input type="text" class="form-control" id="" placeholder="Miner first name" formControlName="firstName">
+      </div>
+      <div class="col">
+        <label for="">Last Name</label>
+        <input type="text" class="form-control" id="" placeholder="Miner lastName" formControlName="lastName">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col">
+        <label for="">TypeId</label>
+        <select class="form-control" formControlName="typeId">
+          <option value={{typeId}} *ngFor="let typeId of typesId">{{typeId}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="">Identification</label>
+        <input type="text" class="form-control" id="" placeholder="Miner identification" formControlName="identification">
+      </div>
+      <div class="col">   
+        <label for="">Municipality</label>
+        <select class="form-control" formControlName="municipality">
+          <option value={{municipality}} *ngFor="let municipality of municipalities">{{municipality}}</option>
+        </select>
+      </div>
+    </div>
+    <br><br>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+</div>
