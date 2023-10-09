@@ -37,4 +37,9 @@ export class ApiService {
     const endPoint = `${this.url}/miner/typesId`
     return this.http.get<string[]>(endPoint)
   }
+
+  deleteMiner(id: string):Observable<any>{
+    const endPoint = `${this.url}/miner/${id}`
+    return this.http.delete(endPoint)
+  }
 }
