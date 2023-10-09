@@ -16,8 +16,8 @@
           <th scope="col">Delete</th>
         </tr>
       </thead>
-      <tbody *ngFor="let miner of miners">
-        <tr>
+      <tbody>
+        <tr *ngFor="let miner of miners">
           <th scope="row">{{miners.indexOf(miner)+1}}</th>
           <td>{{miner.fullName}}</td>
           <td>{{miner.municipality}}</td>

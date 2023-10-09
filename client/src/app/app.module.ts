@@ -8,19 +8,26 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MinerComponent } from './components/miner/miner.component';
 import { HomeComponent } from './components/home/home.component';
+import { EditMinerComponent } from './components/edit-miner/edit-miner.component';
+import { CreateMinerComponent } from './components/create-miner/create-miner.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     MinerComponent,
-    HomeComponent
+    HomeComponent,
+    EditMinerComponent,
+    CreateMinerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

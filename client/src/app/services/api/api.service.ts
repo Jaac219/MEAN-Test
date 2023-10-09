@@ -14,7 +14,27 @@ export class ApiService {
   constructor(private http:HttpClient) { }
 
   getAllMiners():Observable<Miner[]>{
-    const endPoint = this.url + '/miner'
+    const endPoint = `${this.url}/miner`
     return this.http.get<Miner[]>(endPoint)
+  }
+
+  getOneMiner(id: string):Observable<Miner>{
+    const endPoint = `${this.url}/miner/${id}`
+    return this.http.get<Miner>(endPoint)
+  }
+
+  putOneMiner(form: Miner, id: string):Observable<any>{
+    const endPoint = `${this.url}/miner/${id}`
+    return this.http.patch(endPoint, form, { responseType: 'text' })
+  }
+
+  getMunicipalities():Observable<string[]>{
+    const endPoint = `${this.url}/location/municipality`
+    return this.http.get<string[]>(endPoint)
+  }
+
+  getTypesId():Observable<string[]>{
+    const endPoint = `${this.url}/miner/typesId`
+    return this.http.get<string[]>(endPoint)
   }
 }
