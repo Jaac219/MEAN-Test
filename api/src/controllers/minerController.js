@@ -7,9 +7,16 @@ const typesId = ['CC','CI', 'CE', 'TI', 'RC', 'PASSPORT']
 
 const getAll = async (req, res) => {
   try {
-    const miners = await MinerModel.find().lean()
+    const { municipality, typeId } = req.query
+    const query = {}
+
+    if(municipality) query.municipality = { $regex: municipality, $options: 'i' }
+    if(typeId) query.typeId = typeId
+
+    const miners = await MinerModel.find(query).lean()
     miners.map((miner)=>
       miner.fullName = `${miner.firstName} ${miner.lastName}`)
+
     res.status(200).json(miners)
   } catch (e) {
     console.error(e)
