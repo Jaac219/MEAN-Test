@@ -23,9 +23,15 @@ export class ApiService {
     return this.http.get<Miner>(endPoint)
   }
 
-  putOneMiner(form: Miner, id: string):Observable<any>{
+  putOneMiner(form: Miner | any, id: string):Observable<any>{
+    const formData = new FormData();
+
+    Object.keys(form).forEach(key => {
+      formData.append(key, form[key]);
+    })
+
     const endPoint = `${this.url}/miner/${id}`
-    return this.http.patch(endPoint, form, { responseType: 'text' })
+    return this.http.patch(endPoint, formData, { responseType: 'text' })
   }
 
   getMunicipalities():Observable<string[]>{
@@ -43,8 +49,14 @@ export class ApiService {
     return this.http.delete(endPoint)
   }
 
-  createMiner(form: Miner):Observable<any>{
+  createMiner(form: Miner | any):Observable<any>{
+    const formData = new FormData();
+
+    Object.keys(form).forEach(key => {
+      formData.append(key, form[key]);
+    })
+
     const endPoint = `${this.url}/miner`
-    return this.http.post(endPoint, form, { responseType: 'text' })
+    return this.http.post(endPoint, formData, { responseType: 'text' });
   }
 }

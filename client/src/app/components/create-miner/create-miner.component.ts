@@ -18,7 +18,8 @@ export class CreateMinerComponent {
     lastName: new FormControl(''),
     typeId: new FormControl(''),
     identification: new FormControl(0),
-    municipality: new FormControl('')
+    municipality: new FormControl(''),
+    img: new FormControl('')
   })
 
   constructor(private activeRouter:ActivatedRoute, private router:Router, private apiService:ApiService){}
@@ -40,4 +41,9 @@ export class CreateMinerComponent {
      })
   }
 
+  onFileChange(event: any) {
+    this.createForm.patchValue({
+      img: event.target.files[0]
+    })
+  }
 }

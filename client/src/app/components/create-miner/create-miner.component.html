@@ -29,6 +29,13 @@
         </select>
       </div>
     </div>
+    <br>
+    <div class="form-group row">
+      <div class="custom-file">
+        <input (change)="onFileChange($event)" type="file" class="custom-file-input">
+      </div>
+    </div>
+
     <br><br>
     <button type="submit" class="btn btn-primary">Guardar</button>
   </form>

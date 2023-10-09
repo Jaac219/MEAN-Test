@@ -29,6 +29,14 @@
         </select>
       </div>
     </div>
+    <br>
+    <div class="form-group row">
+      <div class="custom-file">
+        <input (change)="onFileChange($event)" type="file" class="custom-file-input">
+      </div>
+    </div>
+    <br>
+    <img [ngSrc]="miner.imgUrl" width="640" height="480" />
     <br><br>
     <button type="submit" class="btn btn-primary">Guardar</button>
   </form>

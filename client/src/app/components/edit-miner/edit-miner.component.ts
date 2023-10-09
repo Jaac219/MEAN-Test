@@ -20,7 +20,9 @@ export class EditMinerComponent {
     lastName: new FormControl(''),
     typeId: new FormControl(''),
     identification: new FormControl(0),
-    municipality: new FormControl('')
+    municipality: new FormControl(''),
+    imgUrl: new FormControl(''),
+    img: new FormControl()
   })
 
   constructor(private activeRouter:ActivatedRoute, private router:Router, private apiService:ApiService){}
@@ -35,7 +37,9 @@ export class EditMinerComponent {
           'lastName':this.miner.lastName,
           'typeId':this.miner.typeId,
           'identification':this.miner.identification,
-          'municipality':this.miner.municipality
+          'municipality':this.miner.municipality,
+          'imgUrl':this.miner.municipality,
+          'img':null,
         });
       })
 
@@ -55,5 +59,18 @@ export class EditMinerComponent {
      .subscribe((data)=>{
       this.router.navigate(['miners'])
      })
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+
+    // Leer el archivo como URL
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.miner.imgUrl = e.target.result;
+    };
+    reader.readAsDataURL(file);
+
+    this.editForm.patchValue({ img: file });
   }
 }
