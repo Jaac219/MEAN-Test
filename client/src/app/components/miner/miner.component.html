@@ -1,16 +1,33 @@
-<!-- <ng-container *ngIf="miner">
-  <h2>{{miner.fullName}}</h2>
-  <img [ngSrc]="miner.imgUrl" width="640" height="480" />
+<ng-container *ngIf="miners.length > 0">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Municipality</th>
+        <th scope="col">Type Id</th>
+        <th scope="col">Identification</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let miner of miners">
+      <tr>
+        <th scope="row">1</th>
+        <td>{{miner.fullName}}</td>
+        <td>{{miner.municipality}}</td>
+        <td>{{miner.typeId}}</td>
+        <td>{{miner.identification}}</td>
+        <td><button>Edit</button></td>
+        <td><button>Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
 </ng-container>
 
-<ng-container *ngIf="!miner">
-  <h1>Miner no exist</h1>
-</ng-container> -->
+<ng-container *ngIf="miners.length === 0">
+  <p>No hay datos de mineros disponibles.</p>
+</ng-container>
 
 
- <!-- <app-miner 
-  //   [miner]="miner" 
-  //   *ngFor="let miner of miners">
-  // </app-miner> -->
-
-<!-- <h1>Miner no exist</h1> -->
+<!-- <img [ngSrc]="miner.imgUrl" width="640" height="480" /> -->

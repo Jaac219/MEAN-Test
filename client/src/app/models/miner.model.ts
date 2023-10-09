@@ -4,5 +4,6 @@ export interface Miner {
   fullName: string,
   typeId: string,
   identification: number,
-  imgUrl: string
+  imgUrl: string,
+  municipality: string
 }
