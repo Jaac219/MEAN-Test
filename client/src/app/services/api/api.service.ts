@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ResponseI } from 'src/app/models/response.model';
-import { Miner } from 'src/app/models/miner.model'; 
+import { FilterMiner, Miner } from 'src/app/models/miner.model'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { enviroment } from 'src/app/environments/environment';
 import { Observable } from 'rxjs';
@@ -13,9 +13,14 @@ export class ApiService {
   url:string = enviroment.API_URL
   constructor(private http:HttpClient) { }
 
-  getAllMiners():Observable<Miner[]>{
+  getAllMiners(filters: FilterMiner | null):Observable<Miner[]>{
+    const params = { typeId: '', municipality: ''};
+
+    if (filters && filters.typeId) params['typeId'] = filters.typeId;
+    if (filters && filters.municipality)  params['municipality'] = filters.municipality;
+
     const endPoint = `${this.url}/miner`
-    return this.http.get<Miner[]>(endPoint)
+    return this.http.get<Miner[]>(endPoint, { params });
   }
 
   getOneMiner(id: string):Observable<Miner>{

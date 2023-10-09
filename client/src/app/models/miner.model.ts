@@ -8,3 +8,8 @@ export interface Miner {
   imgUrl: string,
   municipality: string
 }
+
+export interface FilterMiner {
+  typeId?: string | null,
+  municipality?: string | null
+}

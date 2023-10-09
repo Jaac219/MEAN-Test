@@ -1,8 +1,29 @@
 <div class="container">
-  <h3>Lista de mineros</h3><br/>
-  <button (click)="createMiner()" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-    Create Miner
-  </button>
+  <br>
+  <form [formGroup]="filterForm" (ngSubmit)="getMinersWithFilter(filterForm.value)">
+    <div class="form-group row">
+      <div class="col">   
+        <select class="form-control" formControlName="municipality">
+          <option value="" disabled selected>Select an option</option>
+          <option value={{municipality}} *ngFor="let municipality of municipalities">{{municipality}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <select class="form-control" formControlName="typeId">
+          <option value="" disabled selected>Select an option</option>
+          <option value={{typeId}} *ngFor="let typeId of typesId">{{typeId}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-dark">Filtrar</button>
+      </div>
+      <div class="col">
+        <button type="submit" (click)="filterForm.reset()" class="btn btn-light">Limpiar</button>
+      </div>
+    </div>
+  </form>
+
+  <br>
   <ng-container *ngIf="miners.length > 0">
     <table class="table">
       <thead>
@@ -33,5 +54,8 @@
   <ng-container *ngIf="miners.length === 0">
     <p>No hay datos de mineros disponibles.</p>
   </ng-container>
+  <button (click)="createMiner()" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+    Create Miner
+  </button>
 </div>
 <!-- <img [ngSrc]="miner.imgUrl" width="640" height="480" /> -->
