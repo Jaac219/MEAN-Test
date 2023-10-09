@@ -48,8 +48,7 @@ const create = async (req, res) => {
     
     if (img) {
       const newFileName = `${insert._id}${extname(img.originalname)}`
-      imgUrl = `${req.headers.host}/api/v1/upload/img/${newFileName}`
-      saveImage(img, newFileName)
+      imgUrl = await saveImage(img, newFileName)
     }
 
     if (imgUrl) insert.imgUrl = imgUrl
@@ -79,8 +78,7 @@ const update = async (req, res) => {
     const img = req.file
     if (img) {
       const newFileName = `${id}${extname(img.originalname)}`
-      imgUrl = `${req.headers.host}/api/v1/upload/img/${newFileName}`
-      saveImage(img, newFileName)
+      imgUrl = await saveImage(img, newFileName)
     }
 
     const update = { $set: {} }
@@ -115,17 +113,14 @@ const deleteOne = async (req, res) => {
 const getTypesId = (req, res) => res.send(typesId)
 
 const saveImage = (img, fileName) => {
-  try {
-    fs.writeFile(join(__dirname, '..', `uploads/img/${fileName}`), img.buffer, (err) => {
-      if (err) {
-        console.error('Error al guardar la imagen:', err);
-      } else {
-        console.log('Imagen guardada con éxito');
-      }
+  const filePath = join(__dirname, '..', 'uploads', 'img', fileName);
+
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filePath, img.buffer, (err) => {
+      if (err) reject('Error al guardar la imagen:', err);
+      else resolve(`${process.env.UPLOAD_URL}/img/${fileName}`);
     })
-  } catch (e) {
-    return e
-  }
+  })
 }
 
 module.exports = {
