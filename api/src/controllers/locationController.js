@@ -5,7 +5,7 @@ const getMunicipalities = async (req, res) => {
     const { data } = await locationService.getMunicipalities()
     let rs = []
 
-    if(data) rs = data.map((val)=>val.municipio)
+    if (data) rs = data.map((val) => val.municipio)
 
     res.status(200).json(rs)
   } catch (e) {

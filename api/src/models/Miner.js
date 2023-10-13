@@ -6,9 +6,9 @@ const schema = new Schema({
   _id: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  typeId: { 
-    type: String, 
-    enum: ['CC','CI', 'CE', 'TI', 'RC', 'PASSPORT'], 
+  typeId: {
+    type: String,
+    enum: ['CC', 'CI', 'CE', 'TI', 'RC', 'PASSPORT'],
     required: true
   },
   identification: { type: Number, required: true },

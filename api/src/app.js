@@ -9,19 +9,22 @@ app.use(cors())
 app.use(express.json({ limit: '512mb' }))
 app.use('/api/v1', routes)
 
+;(() => {
+  console.log('Hello world')
+})()
+
 app.use((err, req, res, next) => {
-  const status = err.status || 500;
-  const message = err.message || err.toString();
-  res.status(status).send(message);
+  const status = err.status || 500
+  const message = err.message || err.toString()
+  res.status(status).send(message)
 })
 
 const initApp = (port) => {
-  app.listen(port, ()=>{
-    console.log(`🚀 [Api] Listening in port: ${port}`);
+  app.listen(port, () => {
+    console.log(`🚀 [Api] Listening in port: ${port}`)
   })
 }
 
 module.exports = {
   initApp
 }
-
